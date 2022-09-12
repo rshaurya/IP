@@ -13,4 +13,4 @@ else:
 l = []
 l.append(n1)
 l.append(n2)
-print(int(max(l)), "is greater.")
+print(max(l), "is greater.")
