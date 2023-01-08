@@ -1,22 +1,17 @@
-# patient details
-# dict -- key-pID
-#PID - 2 lists > personal details > hospital status
-    # view details
-    # admit new patient
-    # update patient details
-
 from tabulate import tabulate
+
 pt_table = [['1234','Mudit','16', 'M', '11-12-2006', '24-02-22', '24-02-23', 'Indore', '1238794560'],
             ['1001', 'Atharva', '65', 'M', '02-12-1982', '14-07-2012', '15-07-2012', 'Multiverse', '1769785321']]
+
 p_heads = ['ID', 'Name', 'Age', 'Gender', 'DOB', 'Admit date', 'Discharge date', 'Location', 'Contact no']
 
 def patient(pt_table):
     print('PATIENT')
-    print('\n','1. view details','\n',
-          '2. admit new patient','\n',
-          '3. update patient details')
+    print('\n','1. View details','\n',
+          '2. Admit new patient','\n',
+          '3. Update patient details')
+    opt = input('What would you like to do? ')
 
-    opt = input('what would you like to do? ')
     if opt == '1':
         print('Personal Details')
         print(tabulate(pt_table, p_heads, tablefmt="outline"))
@@ -24,7 +19,6 @@ def patient(pt_table):
     if opt == '2':
         print('Enter his/her details in the following order: ')
         print('Patient ID, Name, Age, Gender, DOB, Admit date, Discharge date, Location, Contact no')
-
         tmp = []
         tmp.append(input('ID: '))
         tmp.append(input('Name: '))
@@ -38,56 +32,185 @@ def patient(pt_table):
         
         pt_table.append(tmp)
         print(tabulate(pt_table, p_heads, tablefmt="outline"))
-
-
     if opt == '3':
         print('What do you want to update?')
         print('\n', '1. Name', '\n',
                 '\n', '2. Age', '\n',
-                '\n', '3. Gender', '\n',
-                '\n', '4. DOB', '\n',
-                '\n', '5. Location', '\n', 
-                '\n', '6. Contact no', '\n')
-        
+                '\n', '3. DOB', '\n',
+                '\n', '4. Location', '\n', 
+                '\n', '5. Contact no', '\n')
         opt = input('Enter your choice: ')
-        id = input('Enter patient id: ')
+        ID = input('Enter patient id: ')
         
-        for i in pt_table:
-            if id in i:
-                
+        if opt == '1':
+            for i in pt_table:
+                if ID in i:
+                    name = input('Enter new name: ')
+                    i[1] = name
+                    print('Successfully updated! Id of patient is: ', ID)
+                    print(tabulate(pt_table, p_heads, tablefmt="outline"))
+                elif ID not in i:
+                    print('ID is invalid')
+                    break
+        if opt == '2':
+            for i in pt_table:
+                if ID in i:
+                    age = input('Enter new age: ')
+                    i[2] = age
+                    print('Successfully updated! Id of patient is: ', ID)
+                    print(tabulate(pt_table, p_heads, tablefmt="outline"))
+                elif ID not in i:
+                    print('ID is invalid')
+                    break
+        if opt == '3':
+            for i in pt_table:
+                if ID in i:
+                    dob = input('Enter new DOB: ')
+                    i[4] = dob
+                    print('Successfully updated! Id of patient is: ', ID)
+                    print(tabulate(pt_table, p_heads, tablefmt="outline"))
+                elif ID not in i:
+                    print('ID is invalid')
+                    break
+        if opt == '4':
+            for i in pt_table:
+                if ID in i:
+                    loc = input('Enter new location: ')
+                    i[7] = loc
+                    print('Successfully updated! Id of patient is: ', ID)
+                    print(tabulate(pt_table, p_heads, tablefmt="outline"))        
+                elif ID not in i:
+                    print('ID is invalid')
+                    break
+        if opt == '5':
+            for i in pt_table:
+                if ID in i:
+                    num = input('Enter new contact number: ')
+                    i[8] = num
+                    print('Successfully updated! Id of patient is: ', ID)
+                    print(tabulate(pt_table, p_heads, tablefmt="outline"))
+                elif ID not in i:
+                    print('ID is invalid')
+                    break
         
 
-#doctor details
-# dict -- key-dID
-#single list
-    # view details
-    # hire doctor
-    # fire doctor
-    # update details      
+dr_table = [['1234', 'Dr. Labhi Ajmera', '37', 'F', 'Neurology', '13-0-2012', '60 Lpa'],
+            ['1002', 'Dr. Atharva Dubey', '20', 'M', 'Biology', '02-02-2002', '75 Lpa']]
 
-dr_table = [['Dr. Labhi Ajmera', '37', 'F', 'Neurology', '13-0-2012', '60 Lpa']]
-d_heads = ['name', 'age', 'gender', 'specialization', 'hire date', 'salary']
+d_heads = ['ID', 'Name', 'Age', 'Gender', 'Specialization', 'Hire date', 'Salary']
+
 def doctor(dr_table):
     print('DOCTOR')
     print('\n', '1. View details', '\n',
                 '2. Hire doctor', '\n',
                 '3. Fire doctor', '\n'
                 '4. Update details', '\n')
-    
     opt = input('What would you like to do? ')
-    if opt == '1':
-        print('Personal Details')
-        print(tabulate(dr_table, d_heads, tablefmt="outline"))
 
+    if opt == '1':
+        print('Details')
+        print(tabulate(dr_table, d_heads, tablefmt="outline"))
+    if opt == '2':
+        print('Enter his/her details in the following order: ')
+        print('ID, Name, Age, Gender, Specialisation, Hire date, Salary')
+
+        tmp = []
+        tmp.append(input('ID: '))
+        tmp.append(input('Name: '))
+        tmp.append(input('Age: '))
+        tmp.append(input('Gender: '))
+        tmp.append(input('Specialisation: '))
+        tmp.append(input('Hire date: '))
+        tmp.append(input('Salary: '))
+        
+        dr_table.append(tmp)
+        print(tabulate(dr_table, d_heads, tablefmt="outline"))
+    
+    if opt == '3':
+        print('Caution! You are about to fire staff!')
+        print('Enter the details: ')
+        ID = input('Enter ID: ')
+        name = input('Enter name(optional. Type xyz if name is unknown): ')
+        for i in dr_table:
+            if ID in i:
+                dr_table.pop(dr_table.index(i))
+                print(tabulate(dr_table, d_heads, tablefmt='outline'))
+            elif ID not in i:
+                print('Invalid id')
+                break
+    if opt == '4':
+        print('What do you want to update?')
+        print('\n', '1. Name', '\n',
+                '\n', '2. Specialisation', '\n',
+                '\n', '3. Salary', '\n')
+        opt = input('Enter your choice: ')
+        ID = input("Enter doctor's id: ")
+        if opt == '1':
+            for i in dr_table:
+                if ID in i:
+                    name = input('Enter new name: ')
+                    i[1] = name
+                    print('Successfully updated! ID of the doctor is: ', ID)
+                    print(tabulate(dr_table, d_heads, tablefmt='outline'))
+                elif ID not in i:
+                    print('Invalid id')
+                    break
+        if opt == '2':
+            for i in dr_table:
+                if ID in i:
+                    spec = input('Enter new specialisation: ')
+                    i[4] = spec
+                    print('Successfully updated! ID of the doctor is: ', ID)
+                    print(tabulate(dr_table, d_heads, tablefmt='outline'))
+                elif ID not in i:
+                    print('Invalid id')
+                    break
+        if opt == '3':
+            for i in dr_table:
+                if ID in i:
+                    sal = input('Enter new salary: ')
+                    i[6] = sal
+                    print('Successfully updated! ID of the doctor is: ', ID)
+                    print(tabulate(dr_table, d_heads, tablefmt='outline'))
+                elif ID not in i:
+                    print('Invalid id')
+                    break
 
 # ward details
 #  dict -- key- ward no.
     # view details
     # upate details
 
-ward_dict = {}
-def ward(ward_dict):
-    print('working ward func!')
+ward_table = [['001', 'Occupied', 'General'],
+                ['002', 'Vacant', 'ICU'],
+                ['003', 'Occupied', 'Operation Theatre']]
+
+ward_heads = ['Ward number', 'Status', 'Ward type']
+
+def ward(ward_table):
+    print('WARD')
+    print('1. View ward details', '\n',
+                '2. Update ward details', '\n')
+    opt = input('What would you like to do? ')
+
+    if opt == '1':
+        print(tabulate(ward_table, ward_heads, tablefmt='outline'))
+    if opt == '2':
+        print('What would you like to update?')
+        print('1. Ward number', '\n',
+                '2. Ward Type', '\n')
+        opt = input('Enter your choice: ')
+        ID = input('Enter current ID of ward: ')
+
+        if opt == '1':
+            for i in ward_table:
+                if ID in i:
+                    new = input('Enter new ward number: ')
+                    i[0] = new
+                    print('SUccessfully updated! The new ward number is ', new)
+                    print(tabulate(ward_table, ward_heads, tablefmt='outline'))
+
+    
 
     
 # department details
@@ -97,7 +220,7 @@ def ward(ward_dict):
     # add new dept
     # add new empl
 
-dept_dict = {}
+dept_table = {}
 def dept(dept_dict):
     print('working dept func!')
 
@@ -105,22 +228,28 @@ def dept(dept_dict):
 
 print('Welcome to ____ hospital')
 print('\n')
-print('View details of: ')
-print('\t 1) PATIENT')
-print('\t 2) DOCTOR')
-print('\t 3) WARD')
-print('\t 4) DEPARTMENT')
 
-num = input('Enter: ')
-if num =='1':
-    patient(pt_table)
+while True:
+    print('\n')
+    print('View details of: ')
+    print('\t 1) PATIENT')
+    print('\t 2) DOCTOR')
+    print('\t 3) WARD')
+    print('\t 4) DEPARTMENT')
+    print('\t 5) EXIT')
 
-if num =='2':
-    doctor(dr_table)
+    num = input('Enter: ')
+    if num =='1':
+        patient(pt_table)
+
+    elif num =='2':
+        doctor(dr_table)
+        
+    elif num =='3':
+        ward(ward_table)
+
+    elif num =='4':
+        dept(dept_table)
     
-if num =='3':
-    ward(ward_dict)
-
-if num =='4':
-    dept(dept_dict)
-
+    elif num == '5':
+        break
