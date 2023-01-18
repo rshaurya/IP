@@ -1,16 +1,20 @@
 from tabulate import tabulate
+from random import *
 
-pt_table = [['1234','Mudit','16', 'M', '11-12-2006', '24-02-22', '24-02-23', 'Indore', '1238794560'],
-            ['1001', 'Atharva', '65', 'M', '02-12-1982', '14-07-2012', '15-07-2012', 'Lucknow', '1769785321'],
-            ['1423', 'Labhi', '12', 'F', '09-01-2010', '10-02-2023', 'NULL', 'Delhi', '1347985234']]
+pt_table = [['1234','Mudit','16', 'M', '11-12-2006', 'Kidney Stones', '24-02-22', '24-02-23', 'Indore', '1238794560'],
+            ['1001', 'Atharva', '65', 'M', '02-12-1982',  'Fever', '14-07-2012', '15-07-2012', 'Lucknow', '1769785321'],
+            ['1423', 'Labhi', '12', 'F', '09-01-2010', 'Pneuomonia', '10-02-2023', 'NULL', 'Delhi', '1347985234']]
 
-p_heads = ['ID', 'Name', 'Age', 'Gender', 'DOB', 'Admit date', 'Discharge date', 'Location', 'Contact no']
+p_heads = ['ID', 'Name', 'Age', 'Gender', 'DOB', 'Disease', 'Admit date', 'Discharge date', 'Location', 'Contact no']
+
+bill_heads = ['Medications', 'Treatment fees', 'Total']
 
 def patient(pt_table):
     print('PATIENT')
     print('\n','1. View details','\n',
           '2. Admit new patient','\n',
-          '3. Update patient details')
+          '3. Update patient details','\n'
+          '4. Checkout Bill')
     opt = input('What would you like to do? ')
 
     if opt == '1':
@@ -19,13 +23,14 @@ def patient(pt_table):
 
     if opt == '2':
         print('Enter his/her details in the following order: ')
-        print('Patient ID, Name, Age, Gender, DOB, Admit date, Discharge date, Location, Contact no')
+        print('Name, Age, Gender, DOB, Disease, Admit date, Discharge date, Location, Contact no')
         tmp = []
-        tmp.append(input('ID: '))
+        tmp.append(randrange(1000, 9999))
         tmp.append(input('Name: '))
         tmp.append(input('Age: '))
         tmp.append(input('Gender: '))
         tmp.append(input('DOB: '))
+        tmp.append(input('Disease: '))
         tmp.append(input('Admit date: '))
         tmp.append(input('Discharge date: '))
         tmp.append(input('Location: '))
@@ -40,6 +45,8 @@ def patient(pt_table):
                 '\n', '3. DOB', '\n',
                 '\n', '4. Location', '\n', 
                 '\n', '5. Contact no', '\n')
+        print('Here are the patient details for your reference: ')
+        print(tabulate(pt_table, p_heads, tablefmt="outline"))
         opt = input('Enter your choice: ')
         ID = input('Enter patient id: ')
         
@@ -50,9 +57,8 @@ def patient(pt_table):
                     i[1] = name
                     print('Successfully updated! Id of patient is: ', ID)
                     print(tabulate(pt_table, p_heads, tablefmt="outline"))
-                elif ID not in i:
-                    print('ID is invalid')
-                    break
+                else:
+                    pass
         if opt == '2':
             for i in pt_table:
                 if ID in i:
@@ -60,9 +66,8 @@ def patient(pt_table):
                     i[2] = age
                     print('Successfully updated! Id of patient is: ', ID)
                     print(tabulate(pt_table, p_heads, tablefmt="outline"))
-                elif ID not in i:
-                    print('ID is invalid')
-                    break
+                else:
+                    pass
         if opt == '3':
             for i in pt_table:
                 if ID in i:
@@ -70,30 +75,35 @@ def patient(pt_table):
                     i[4] = dob
                     print('Successfully updated! Id of patient is: ', ID)
                     print(tabulate(pt_table, p_heads, tablefmt="outline"))
-                elif ID not in i:
-                    print('ID is invalid')
-                    break
+                else:
+                    pass
         if opt == '4':
             for i in pt_table:
                 if ID in i:
                     loc = input('Enter new location: ')
-                    i[7] = loc
+                    i[8] = loc
                     print('Successfully updated! Id of patient is: ', ID)
                     print(tabulate(pt_table, p_heads, tablefmt="outline"))        
-                elif ID not in i:
-                    print('ID is invalid')
-                    break
+                else:
+                    pass
         if opt == '5':
             for i in pt_table:
                 if ID in i:
                     num = input('Enter new contact number: ')
-                    i[8] = num
+                    i[9] = num
                     print('Successfully updated! Id of patient is: ', ID)
                     print(tabulate(pt_table, p_heads, tablefmt="outline"))
-                elif ID not in i:
-                    print('ID is invalid')
-                    break
-        
+                else:
+                    pass
+        if opt == '4':
+            ID = input('Enter patient ID: ')
+            for i in pt_table:
+                if ID in i:
+                    total = randra
+                    print('Bill for patient ', ID, 'is: ') 
+                else:
+                    pass
+
 
 dr_table = [['1234', 'Dr. Labhi Ajmera', '37', 'F', 'Neurology', '13-0-2012', '60 Lpa'],
             ['1002', 'Dr. Atharva Dubey', '20', 'M', 'Biology', '02-02-2002', '75 Lpa'],
@@ -117,7 +127,7 @@ def doctor(dr_table):
         print('ID, Name, Age, Gender, Specialisation, Hire date, Salary')
 
         tmp = []
-        tmp.append(input('ID: '))
+        tmp.append(randrange(1000, 9999))
         tmp.append(input('Name: '))
         tmp.append(input('Age: '))
         tmp.append(input('Gender: '))
@@ -130,21 +140,23 @@ def doctor(dr_table):
     
     if opt == '3':
         print('Caution! You are about to fire staff!')
-        print('Enter the details: ')
+        print('Here are the details for your reference: ')
+        print(tabulate(dr_table, d_heads, tablefmt="outline"))
         ID = input('Enter ID: ')
         name = input('Enter name(optional. Type xyz if name is unknown): ')
         for i in dr_table:
             if ID in i:
                 dr_table.pop(dr_table.index(i))
                 print(tabulate(dr_table, d_heads, tablefmt='outline'))
-            elif ID not in i:
-                print('Invalid id')
-                break
+            else:
+                pass
     if opt == '4':
         print('What do you want to update?')
         print('\n', '1. Name', '\n',
                 '\n', '2. Specialisation', '\n',
                 '\n', '3. Salary', '\n')
+        print('Here are the details for your reference: ')
+        print(tabulate(dr_table, d_heads, tablefmt="outline"))
         opt = input('Enter your choice: ')
         ID = input("Enter doctor's id: ")
         if opt == '1':
@@ -154,9 +166,8 @@ def doctor(dr_table):
                     i[1] = name
                     print('Successfully updated! ID of the doctor is: ', ID)
                     print(tabulate(dr_table, d_heads, tablefmt='outline'))
-                elif ID not in i:
-                    print('Invalid id')
-                    break
+                else:
+                    pass
         if opt == '2':
             for i in dr_table:
                 if ID in i:
@@ -164,9 +175,8 @@ def doctor(dr_table):
                     i[4] = spec
                     print('Successfully updated! ID of the doctor is: ', ID)
                     print(tabulate(dr_table, d_heads, tablefmt='outline'))
-                elif ID not in i:
-                    print('Invalid id')
-                    break
+                else:
+                    pass
         if opt == '3':
             for i in dr_table:
                 if ID in i:
@@ -174,9 +184,8 @@ def doctor(dr_table):
                     i[6] = sal
                     print('Successfully updated! ID of the doctor is: ', ID)
                     print(tabulate(dr_table, d_heads, tablefmt='outline'))
-                elif ID not in i:
-                    print('Invalid id')
-                    break
+                else:
+                    pass
 
 ward_table = [['001', 'Occupied', 'General'],
                 ['002', 'Vacant', 'ICU'],
@@ -197,6 +206,8 @@ def ward(ward_table):
         print('What would you like to update?')
         print('1. Ward number', '\n',
                 '2. Ward Status', '\n')
+        print('Here are the details for your reference: ')
+        print(tabulate(ward_table, ward_heads, tablefmt='outline'))
         opt = input('Enter your choice: ')
         ID = input('Enter current ID of ward: ')
 
@@ -207,6 +218,8 @@ def ward(ward_table):
                     i[0] = new
                     print('SUccessfully updated! The new ward number is ', new)
                     print(tabulate(ward_table, ward_heads, tablefmt='outline'))
+                else:
+                    pass
         if opt == '2':
             for i in ward_table:
                 if ID in i:
@@ -214,6 +227,8 @@ def ward(ward_table):
                     i[1] = new
                     print('SUccessfully updated! The new ward status is ', new)
                     print(tabulate(ward_table, ward_heads, tablefmt='outline'))
+                else:
+                    pass
 
 
 
@@ -239,3 +254,5 @@ while True:
     elif num =='4':
         print('You are exiting!')
         break
+    else:
+        print('Enter a valid choice! ')
