@@ -1,2 +1,2 @@
 # IP
-Learning progress in Informatics Practices Grade XI CBSE
+Learning progress in Informatics Practices CBSE
